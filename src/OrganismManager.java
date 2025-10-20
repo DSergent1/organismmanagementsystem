@@ -13,6 +13,10 @@ public class OrganismManager {
 
         private ArrayList<Organism> organisms = new ArrayList<>();
 
+        public ArrayList<Organism> getOrganisms(){
+            return organisms;
+        }
+
         //checks if the id entered is a duplicate
         public boolean idDuplicate(String id) {
             for (Organism organism : organisms) {
@@ -25,6 +29,9 @@ public class OrganismManager {
 
         //method that adds an organism if the ID is unique
         public boolean addOrganism(Organism organism){
+            if(organism == null || organism.getId().length() != 5){
+                return false;
+            }
             if(idDuplicate(organism.getId())) return false;
             organisms.add(organism);
             return true;
@@ -144,6 +151,27 @@ public class OrganismManager {
 
         }
         return true;
+    }
+
+    //getter for testing custom method
+    public float getCustomMethodAverage(String cladeName){
+            float sumOfClade = 0;
+            int divisor = 0;
+            for (Organism organism : organisms){
+                if(organism.getCladeName().equals(cladeName)){
+                    float length = organism.getAverageLength();
+                    String unitLength = organism.getLengthUnit();
+
+                    switch(unitLength){
+                        case "m": length*= 100; break;
+                        case "mm": length/= 100; break;
+                    }
+                    sumOfClade += length;
+                    divisor++;
+                }
+            }
+            return divisor == 0 ? 0 : sumOfClade/divisor;
+
     }
 
 //method for loading in organisms from a file
