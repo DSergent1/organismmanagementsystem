@@ -45,7 +45,7 @@ public class OrganismManager {
             //rearranged display to show in a tabled format, dashes are for left-alignment
             System.out.printf("%-8s %-20s %-40s %-15s %-15s %-60s %-15s %-15s%n",
                     "ID |", "| Clade |", "| Genus & Species |", "| Lifespan |", "| Lifespan Unit |", "| Features |", "| Avg Length |", "| Length Unit|");
-            System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+            System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
             // Table rows
             for (Organism organism : organisms) {
@@ -106,11 +106,11 @@ public class OrganismManager {
         return false;
     }
     //custom method that makes an array based on clade and gives them an average length
-    public void displayAverageLengthByClade() {
+    public boolean displayAverageLengthByClade() {
         //Check if array is empty
         if (organisms.isEmpty()) {
             System.out.println("No organisms available.");
-            return;
+            return false;
         }
 //create an array here to go by clades
         ArrayList<String> processedClades = new ArrayList<>();
@@ -139,11 +139,11 @@ public class OrganismManager {
                 }
             }
                 float avg = totalForCentimeters / count;
-                System.out.printf("Clade: %s | Average Length: %.2f cm%n",
-                        clade, avg);
+                System.out.printf("Clade: %s | Average Length: %.2f cm%n", clade, avg);
                 processedClades.add(clade);
 
         }
+        return true;
     }
 
 //method for loading in organisms from a file

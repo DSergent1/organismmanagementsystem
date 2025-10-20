@@ -14,10 +14,8 @@ public class Organism {
     private String lengthUnit;
 
     // Constructor
-    public Organism(String id, String cladeName, String genusSpecies,
-                    int lifespanEstimate, String lifespanUnit,
-                    String definitiveFeatures,
-                    float averageLength, String lengthUnit) {
+    public Organism(String id, String cladeName, String genusSpecies, int lifespanEstimate, String lifespanUnit,
+                    String definitiveFeatures, float averageLength, String lengthUnit) {
         this.id = id;
         this.cladeName = cladeName;
         this.genusSpecies = genusSpecies;

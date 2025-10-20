@@ -26,7 +26,7 @@ public class OrganismApplication {
             displayMenu();
 
             System.out.print("Enter choice: ");
-            String userChoice = scanner.nextLine().trim();
+            String userChoice = scanner.nextLine();
 
             //switch case to connected to methods either in OrganismManager or CLI methods below
             switch (userChoice) {
