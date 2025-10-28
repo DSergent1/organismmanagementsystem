@@ -37,7 +37,6 @@ class OrganismManagerTest {
 
     }
 
-
     @org.junit.jupiter.api.Test
     void removeOrganism() {
         manage.addOrganism(organism);

@@ -70,15 +70,12 @@ public class OrganismManager {
             if (organism.getId().equals(id)) {
                 switch (attribute.toLowerCase()) {
                     case "clade":
-                    case "cladename":
                         organism.setCladeName(newValue);
                         return true;
                     case "genus":
-                    case "genusspecies":
                         organism.setGenusSpecies(newValue);
                         return true;
                     case "lifespan":
-                    case "lifespanestimate":
                         try {
                             int lifespan = Integer.parseInt(newValue);
                             organism.setLifespanEstimate(lifespan);
@@ -86,15 +83,14 @@ public class OrganismManager {
                         } catch (NumberFormatException e) {
                             return false;
                         }
-                    case "lifespanunit":
+                    case "lifespan unit":
                         organism.setLifespanUnit(newValue);
                         return true;
                     case "features":
-                    case "definitivefeatures":
                         organism.setDefinitiveFeatures(newValue);
                         return true;
+                    case "average length":
                     case "average":
-                    case "averagelength":
                         try {
                             float avg = Float.parseFloat(newValue);
                             organism.setAverageLength(avg);
@@ -120,37 +116,42 @@ public class OrganismManager {
             return false;
         }
 //create an array here to go by clades
-        ArrayList<String> processedClades = new ArrayList<>();
+        ArrayList<String> enteredClades = new ArrayList<>();
 
         for (Organism organism : organisms) {
             String clade = organism.getCladeName();
-            if (processedClades.contains(clade)) continue;
+            if (enteredClades.contains(clade)) continue;
 
-            float totalForCentimeters = 0;
-            int count = 0;
-            for (Organism org : organisms) {
-                if (org.getCladeName().equals(clade)) {
-                    float measurement = org.getAverageLength();
-                    String unit = org.getLengthUnit().toLowerCase();
-                    // Convert to cm here
-                    switch (unit) {
-                        case "m":
-                            measurement *= 100;
-                            break;
-                        case "mm":
-                            measurement /= 10;
-                            break;
-                    }
-                    totalForCentimeters += measurement;
-                    count++;
-                }
-            }
-                float avg = totalForCentimeters / count;
-                System.out.printf("Clade: %s | Average Length: %.2f cm%n", clade, avg);
-                processedClades.add(clade);
+            float avg = getAvg(clade);
+            System.out.printf("Clade: %s | Average Length: %.2f cm%n", clade, avg);
+                enteredClades.add(clade);
 
         }
         return true;
+    }
+
+    public float getAvg(String clade) {
+        float totalForCentimeters = 0;
+        int count = 0;
+        for (Organism org : organisms) {
+            if (org.getCladeName().equals(clade)) {
+                float measurement = org.getAverageLength();
+                String unit = org.getLengthUnit().toLowerCase();
+                // Convert to cm here
+                switch (unit) {
+                    case "m":
+                        measurement *= 100;
+                        break;
+                    case "mm":
+                        measurement /= 10;
+                        break;
+                }
+                totalForCentimeters += measurement;
+                count++;
+            }
+        }
+        float avg = totalForCentimeters / count;
+        return avg;
     }
 
     //getter for testing custom method
@@ -245,7 +246,7 @@ public class OrganismManager {
                             lifespanUnit, definiteFeatures, (float) averageLength, lengthUnit);
                     organisms.add(o);
                 }
-                return "File uploaded correctly . "+ lineNum + " organisms were successfully added.";
+                return "File uploaded correctly. "+ lineNum + " organisms were successfully added.";
 
             } catch (IOException e) {
                 return "Error reading file: " + e.getMessage();
