@@ -78,6 +78,7 @@ public class OrganismManager {
                     case "lifespan":
                         try {
                             int lifespan = Integer.parseInt(newValue);
+                            if (lifespan <= 0) return false;
                             organism.setLifespanEstimate(lifespan);
                             return true;
                         } catch (NumberFormatException e) {
@@ -93,6 +94,7 @@ public class OrganismManager {
                     case "average":
                         try {
                             float avg = Float.parseFloat(newValue);
+                            if (avg <= 0) return false;
                             organism.setAverageLength(avg);
                             return true;
                         } catch (NumberFormatException e) {
@@ -100,7 +102,7 @@ public class OrganismManager {
                         }
                     case "lengthunit":
                         organism.setLengthUnit(newValue);
-                        return true;
+                        return newValue.equals("mm") || newValue.equals("cm") || newValue.equals("m");
                     default:
                         return false;
                 }
