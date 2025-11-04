@@ -55,22 +55,26 @@ public class OrganismGUI extends JFrame{
 
         /*                        action listener for deleting organism by its id                         */
         deleteOrganismButton.addActionListener(e -> {
-            String id = JOptionPane.showInputDialog("Enter 5 digit ID to choose an organism to delete: ");
+            String id = getSelectedOrganismRow();
 
             //check to ensure id is not null, isn't empty, is 5 digits, and is all digits
             if(id == null|| id.trim().isEmpty()|| id.length() != 5 || !id.chars().allMatch(Character::isDigit)){
                 JOptionPane.showMessageDialog(null, "Incorrect id format");
             }
 
+            int confirmDeletion = JOptionPane.showConfirmDialog(null, "Do you want to delete organism: " + id + "?",
+                    "Delete Confirmation", JOptionPane.YES_NO_OPTION);
+            if (confirmDeletion != JOptionPane.YES_OPTION) return;
+
             Organism removedOrganism = manager.removeOrganism(id);
             //after entering organism id, if-statement checks if id has a value
             if (removedOrganism != null){
-                JOptionPane.showMessageDialog(null, "Organism: "+ id + "deleted");
+                JOptionPane.showMessageDialog(null, "Organism: "+ id + " deleted");
+                OrganismTable();
             }
             else {
                 JOptionPane.showMessageDialog(null, "Not an existing organism.");
             }
-            OrganismTable();
         });
 
 
@@ -153,16 +157,16 @@ public class OrganismGUI extends JFrame{
 
         /*              update button action listener with combo box to select attribute                */
         updateOrganismButton.addActionListener(e ->{
-            String id = JOptionPane.showInputDialog("Enter 5 digit ID to choose an organism to update: ");
+            String id = getSelectedOrganismRow();
             //check to ensure id is not null, isn't empty, is 5 digits, and is all digits
             if(id == null|| id.trim().isEmpty()|| id.length() != 5 || !id.chars().allMatch(Character::isDigit)){
                 JOptionPane.showMessageDialog(null, "Incorrect id format");
                 return;
             }
             Organism exists = null;
-            for (Organism o : manager.getOrganisms()) {
-                if (o.getId().equals(id)) {
-                    exists = o;
+            for (Organism organism : manager.getOrganisms()) {
+                if (organism.getId().equals(id)) {
+                    exists = organism;
                     break;
                 }
             }
@@ -181,7 +185,7 @@ public class OrganismGUI extends JFrame{
             }
 
             //asking for updated value and making sure value entered isn't null
-            String newValue = JOptionPane.showInputDialog("Enter new value of updated attribute: ");
+            String newValue = JOptionPane.showInputDialog("Enter new value of updated attribute (" + cBoxChoice+ "): ");
             if (newValue == null){
                 JOptionPane.showMessageDialog(null, "Please enter a value: ");
                 return;
@@ -220,6 +224,18 @@ public class OrganismGUI extends JFrame{
     public static void main(String[] args) {
         new OrganismGUI();
 
+    }
+
+    //allows selecting a row to get ID for deleting or updating
+    private String getSelectedOrganismRow(){
+        int selectedRow = JTOrganismTable.getSelectedRow();
+        //ensures a row is selected when clicking the button
+        if(selectedRow == -1){
+            JOptionPane.showMessageDialog(null, "Please select an organism from the table.");
+            return null;
+        }
+        //gets value of ID at column 0
+        return JTOrganismTable.getValueAt(selectedRow,0).toString();
     }
 
     //creating a table for the GUI, method used to update table after changes
