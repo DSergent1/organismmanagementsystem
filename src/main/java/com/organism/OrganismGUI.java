@@ -32,6 +32,7 @@ public class OrganismGUI extends JFrame {
         JFileChooser dbFileChooser = new JFileChooser();
         dbFileChooser.setDialogTitle("Select the Organisms Database File (.db)");
         dbFileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        dbFileChooser.setFileFilter(new FileNameExtensionFilter("db files", "db"));
 
         int result = dbFileChooser.showOpenDialog(this);
 
