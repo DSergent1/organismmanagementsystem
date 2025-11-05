@@ -1,3 +1,6 @@
+/**
+ * Database Helper class to connect the interface to the database
+ */
 package com.organism;
 
 import javax.swing.*;

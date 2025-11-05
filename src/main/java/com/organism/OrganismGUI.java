@@ -1,3 +1,10 @@
+/** Phase 3
+ * Organism GUI file to create an interface that implements
+ * functions from the previous phases
+ *
+ * Phase 4 - Adding database functionality to the buttons created in the GUI form
+ */
+
 package com.organism;
 
 import javax.swing.*;
