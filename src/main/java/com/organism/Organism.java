@@ -1,13 +1,12 @@
 package com.organism;
 
 /**
- * This class is used to make an organism with information in attributes such as: clade names, genus & species,
+ * This class is used to make an organism with information in attributes such as: clade names, genus and species,
  * defining features, and measurements.
  *
  * Organism class to create organism object with attributes, getters and setters,
  * a constructor, and a toString() method.
  */
-
 public class Organism {
     // Attributes
     private String id;

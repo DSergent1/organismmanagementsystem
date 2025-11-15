@@ -1,15 +1,14 @@
 package com.organism;
-/** Organism Manager is used for managing the Organism class objects.
- *
- * This Organism manager class will hold the methods for CRUD operations and the
- * custom action(finding average organism size grouped by clade).
- */
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-
+/**
+ * Organism Manager is used for managing the Organism class objects.
+ *
+ * This Organism manager class will hold the methods for CRUD operations and the
+ * custom action(finding average organism size grouped by clade).
+ */
 public class OrganismManager {
 
         private ArrayList<Organism> organisms = new ArrayList<>();
@@ -230,7 +229,7 @@ public class OrganismManager {
      *
      * The file must contain entries in the format: id-cladeName-genusSpecies-lifespanEstimate-lifespanUnit-features-averageLength-lengthUnit.
      *
-     * Each line is validated for:correct number of fields, valid 5-digit ID, non-duplicate ID, & positive numeric lifespan and length.
+     * Each line is validated for:correct number of fields, valid 5-digit ID, non-duplicate ID, and positive numeric lifespan and length.
      *
      * @param filePath the path to the file to load.
      * @return a message with the result or the error that occurred.

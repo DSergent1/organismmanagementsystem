@@ -1,9 +1,6 @@
 package com.organism;
+import java.util.Scanner;
 /**
- *@author Daniel Sergent
- *@since  11/15/25
- *Course: CEN-3024C-14877
- *Professor: Dr. Macon
  * This Organism application will serve as a study aid for my Biology 2 course and data management
  * system project for my Software Development 1 course.
  *
@@ -12,10 +9,11 @@ package com.organism;
  * and CRUD actions plus a custom method(finding average organism size by their clade)
  * can be chosen.
  * Later, it is replaced by a Java Swing based GUI.
+ * Course: CEN-3024C-14877
+ * Professor: Dr. Macon
+ * @author Daniel Sergent
+ * @since 11/15/25
  */
-import java.util.Scanner;
-
-
 public class OrganismApplication {
     private static Scanner scanner = new Scanner(System.in);
     private static OrganismManager manage = new OrganismManager();

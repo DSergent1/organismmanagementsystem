@@ -1,14 +1,14 @@
-/**
- * Database Helper class to connect the interface to the database.
- *
- * It connects to a SQLite db chosen and adds all the CRUD methods and custom method to interact with the database.
- */
+
 package com.organism;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
-
+/**
+ * Database Helper class to connect the interface to the database.
+ *
+ * It connects to a SQLite db chosen and adds all the CRUD methods and custom method to interact with the database.
+ */
 public class DatabaseHelper {
     private String dbPath;
 
@@ -56,7 +56,7 @@ public class DatabaseHelper {
      *
      * @param id 5-digit not duplicate organism ID.
      * @param clade clade name.
-     * @param genus genus & species of the organism.
+     * @param genus genus and species of the organism.
      * @param lifespan lifespan estimate, positive number.
      * @param lifespanUnit unit of lifespan: days, weeks, minutes.
      * @param features key definitive features.

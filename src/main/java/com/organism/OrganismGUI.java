@@ -1,13 +1,4 @@
-/**
- * GUI class for the Organism Application
- *
- * Phase 3
- * Organism GUI file to create an interface that implements functions from the previous phases.
- *
- * Phase 4 -Adding database functionality to the buttons created in the GUI form
- * Allows users to select a db file to use, a txt file to upload some organisms, CRUD operations by GUI, & custom method
- * all added to the database.
- */
+
 
 package com.organism;
 
@@ -16,7 +7,16 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import java.io.File;
 
-
+/**
+ * GUI class for the Organism Application
+ *
+ * Phase 3
+ * Organism GUI file to create an interface that implements functions from the previous phases.
+ *
+ * Phase 4 -Adding database functionality to the buttons created in the GUI form
+ * Allows users to select a db file to use, a txt file to upload some organisms, CRUD operations by GUI, and custom method
+ * all added to the database.
+ */
 public class OrganismGUI extends JFrame {
     private JPanel MainPanel;
     private JButton customMethodButton;
@@ -25,10 +25,12 @@ public class OrganismGUI extends JFrame {
     private JButton deleteOrganismButton;
     private JButton fileUploadButton;
     private JButton updateOrganismButton;
-    private JScrollPane scrollPane;
     private DatabaseHelper dbHelper;
 
 
+    /**
+     * Creates new Organism Manager
+     */
     OrganismManager manager = new OrganismManager();
     /**
      * Constructor for the Organism GUI window, adds all the interface components,
