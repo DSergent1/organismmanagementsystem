@@ -1,18 +1,18 @@
 package com.organism;
 /**
- *Name: Daniel Sergent
- *Due Date: 10/13/25
+ *@author Daniel Sergent
+ *@since  11/15/25
  *Course: CEN-3024C-14877
  *Professor: Dr. Macon
-
-This Organism application will serve as a study aid for my Biology 2 course and data management
- system project for my Software Development 1 course.
-
-This OrganismApplication class will handle the interface in CLI form in phase 1,
- and GUI via Java Swing in phase 3. Here, inputs from the user will be entered through a menu
- and CRUD actions plus a custom method(finding average organism size by their clade)
- can be chosen.
-*/
+ * This Organism application will serve as a study aid for my Biology 2 course and data management
+ * system project for my Software Development 1 course.
+ *
+ * This OrganismApplication class will handle the interface in CLI form in phase 1,
+ * and in phase 2. Here, inputs from the user will be entered through a menu
+ * and CRUD actions plus a custom method(finding average organism size by their clade)
+ * can be chosen.
+ * Later, it is replaced by a Java Swing based GUI.
+ */
 import java.util.Scanner;
 
 
@@ -20,6 +20,11 @@ public class OrganismApplication {
     private static Scanner scanner = new Scanner(System.in);
     private static OrganismManager manage = new OrganismManager();
 
+    /**
+     * Program starting point. Has a looping switch-case menu that allows the user to perform
+     * CRUD operations and run custom a custom method through the CLI prompts.
+     *
+     */
     public static void main(String[] args) {
 
         boolean runProgram = true;
@@ -63,7 +68,9 @@ public class OrganismApplication {
         }
     }
 
-    // Menu for organism management
+    /**
+     * Menu for organism management that lists possible user actions.
+     */
     public static void displayMenu() {
         System.out.println("-----------------------------------------------------------");
         System.out.println("-----------------Organism Management System----------------");
@@ -77,7 +84,12 @@ public class OrganismApplication {
         System.out.println("-----------------------------------------------------------");
     }
 
-    // Load organism data from file following the format given
+    /**
+     * Prompting the user for a file path and trys to load organisms from the
+     * specified file using the loadFile method from Organism Manager.
+     *
+     * The method prints a result message and displays all organisms after loading.
+     */
     public static void importOrganisms() {
         System.out.print("Enter file path (format: ID-CladeName-GenusSpecies-LifespanEstimate-LifespanUnit-DefiniteFeatures-AverageLength-LengthUnit): ");
         String path = scanner.nextLine().trim();
@@ -86,7 +98,12 @@ public class OrganismApplication {
         manage.displayOrganisms();
     }
 
-    // Add new organism manually via CLI
+    /**
+     * Add new organism manually via CLI.
+     *
+     * Validates the inputs and ensures there is: a 5-digit number, non-duplicate ID, a positive number lifespan,
+     * a positive average length, and length unit is in cm, m, or mm.
+     */
     public static void addOrganismCLI() {
         System.out.println("Enter a new organism:");
 
@@ -184,7 +201,12 @@ public class OrganismApplication {
 
     }
 
-    // Remove organism by its ID
+    /**
+     * Asks the user for an organism ID and removes the organism by ID, if it exists.
+     *
+     * It then validates the ID format and prints whether the removal was successful.
+     * Uses Organism Manager's removeOrganism.
+     */
     private static void removeOrganismCLI() {
         System.out.print("Enter 5-digit ID to remove: ");
         String id = scanner.nextLine();
@@ -210,7 +232,12 @@ public class OrganismApplication {
         }
 
     }
-    //CLI option to update organism going by id then choosing an attribute
+    /**
+     * Handles updating a single attribute of an organism identified by its ID.
+     *The user will enter: the 5-digit organism ID, the attribute name to modify, and the new value.
+     *
+     * It will use Organism Manager's updateOrganism.
+     */
     public static void updateOrganismCLI() {
         System.out.print("Enter 5-digit ID of organism to update: ");
         String id = scanner.nextLine();

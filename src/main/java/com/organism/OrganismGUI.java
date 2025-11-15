@@ -1,8 +1,12 @@
-/** Phase 3
- * Organism GUI file to create an interface that implements
- * functions from the previous phases
+/**
+ * GUI class for the Organism Application
  *
- * Phase 4 - Adding database functionality to the buttons created in the GUI form
+ * Phase 3
+ * Organism GUI file to create an interface that implements functions from the previous phases.
+ *
+ * Phase 4 -Adding database functionality to the buttons created in the GUI form
+ * Allows users to select a db file to use, a txt file to upload some organisms, CRUD operations by GUI, & custom method
+ * all added to the database.
  */
 
 package com.organism;
@@ -26,7 +30,14 @@ public class OrganismGUI extends JFrame {
 
 
     OrganismManager manager = new OrganismManager();
-    //constructor for my GUI class with title, close, size, and other features
+    /**
+     * Constructor for the Organism GUI window, adds all the interface components,
+     * has the user select a database file to start, and loads all organisms from it.
+     *
+     * This constructor also has button listeners for: file uploading from txt, adding an organism form,
+     * deleting an organism by selecting it on the table, updating attributes by selecting it on the table,
+     * and a display for the custom method.
+     */
     public OrganismGUI() {
         setContentPane(MainPanel);
         setTitle("Organism Application");
@@ -69,7 +80,10 @@ public class OrganismGUI extends JFrame {
         setVisible(true);
 
 
-        /*                            file upload button with file explorer added                               */
+        /**
+         * Handles uploading organism data from a .txt file, each valid line is checked and added into the database,
+         * and the table is refreshed after the upload is done.
+         */
         fileUploadButton.addActionListener(e -> {
 
             JFileChooser fileChooser = new JFileChooser();
@@ -131,7 +145,9 @@ public class OrganismGUI extends JFrame {
             JTOrganismTable.setModel(dbHelper.getAllOrganisms()); //updates the GUI table
         });
 
-        /*                        action listener for deleting organism by its id                         */
+        /**
+         * Delete button for the organism that is selected, asks for confirmation, then refreshes the table after.
+         */
         deleteOrganismButton.addActionListener(e -> {
             String id = getSelectedOrganismRow();
 
@@ -155,7 +171,10 @@ public class OrganismGUI extends JFrame {
         });
 
 
-        /*                            add organism button with each individual attribute having an input box       */
+        /**
+         * Opens up a series of input boxes to add organism information one attribute at a time and validates each
+         * attribute before moving on to the next.
+         */
         addOrganismButton.addActionListener(e -> {
             //needs to follow id format rules
             String id;
@@ -231,7 +250,10 @@ public class OrganismGUI extends JFrame {
         });
 
 
-        /*              update button action listener with combo box to select attribute                */
+        /**
+         * Allow the user to select an attribute and update its value for the selected organism.
+         * Refreshes the table after successful update.
+         */
         updateOrganismButton.addActionListener(e -> {
             String id = getSelectedOrganismRow();
             if (id == null) return;
@@ -256,7 +278,10 @@ public class OrganismGUI extends JFrame {
             }
         });
 
-        /*                         custom method button gui to display average lengths by their clades               */
+        /**
+         * Displays the calculated average lengths of organisms grouped by their clades.
+         * It then shows the formatted results.
+         */
         customMethodButton.addActionListener(e -> {
             String averagesOutput = dbHelper.getAverageLengthByCladeString();
             //checks to see if database is empty before displaying custom method
@@ -269,12 +294,22 @@ public class OrganismGUI extends JFrame {
 
     }
 
+    /**
+     * Starts the program and constructs the new GUI
+     * @param args
+     */
     public static void main(String[] args) {
         new OrganismGUI();
 
     }
 
-    //allows selecting a row to get ID for deleting or updating
+    /**
+     * Returns the ID of the organism in the selected table row.
+     *
+     * If no row is selected, a message is shown to the user and null is returned.
+     *
+     * @return the 5-digit organism ID from column 0, or null if no row is selected
+     */
     private String getSelectedOrganismRow() {
         int selectedRow = JTOrganismTable.getSelectedRow();
         //ensures a row is selected when clicking the button

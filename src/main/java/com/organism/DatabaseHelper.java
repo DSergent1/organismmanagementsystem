@@ -1,5 +1,7 @@
 /**
- * Database Helper class to connect the interface to the database
+ * Database Helper class to connect the interface to the database.
+ *
+ * It connects to a SQLite db chosen and adds all the CRUD methods and custom method to interact with the database.
  */
 package com.organism;
 
@@ -10,6 +12,12 @@ import java.sql.*;
 public class DatabaseHelper {
     private String dbPath;
 
+    /**
+     * Constructor for a DatabaseHelper for the SQLite database path.
+     * Then, loads the SQLite JDBC driver.
+     *
+     * @param dbPath path to the SQLite .db file.
+     */
     public DatabaseHelper(String dbPath) {
         this.dbPath = dbPath;
         try {
@@ -20,10 +28,19 @@ public class DatabaseHelper {
     }
 
 
+    /**
+     * Makes a connection to the SQLite db.
+     * @return Connection object.
+     * @throws SQLException if there is an error accessing the db.
+     */
     private Connection connect() throws SQLException {
         return DriverManager.getConnection("jdbc:sqlite:" + dbPath);
     }
 
+    /**
+     * A test for the database connection
+     * @return true if the db connection works, false if it doesn't.
+     */
     public boolean testConnection() {
         try (Connection conn = connect()) {
             return conn != null;
@@ -34,7 +51,19 @@ public class DatabaseHelper {
         }
     }
 
-    //sql command for adding organisms into the database from the GUI
+    /**
+     * Adds a new organism to the database.
+     *
+     * @param id 5-digit not duplicate organism ID.
+     * @param clade clade name.
+     * @param genus genus & species of the organism.
+     * @param lifespan lifespan estimate, positive number.
+     * @param lifespanUnit unit of lifespan: days, weeks, minutes.
+     * @param features key definitive features.
+     * @param avgLength average length, positive float.
+     * @param lengthUnit unit of length mm, cm, m.
+     * @return true if the organism was added successfully; false if not.
+     */
     public boolean addOrganism(String id, String clade, String genus, int lifespan, String lifespanUnit,
                                String features, float avgLength, String lengthUnit) {
         String sql = "INSERT INTO Organisms (organism_id, clade, species, lifespan, lifespan_unit, features, average_length, length_unit) " +
@@ -59,7 +88,12 @@ public class DatabaseHelper {
         }
     }
 
-    //sql statement for deleting an organism
+    /**
+     * Deletes an organism from the db by its ID.
+     *
+     * @param id, 5-digit ID that exists.
+     * @return true if deletion was successful, false if not.
+     */
     public boolean deleteOrganism(String id) {
         String sql = "DELETE FROM Organisms WHERE organism_id = ?";
         try (Connection conn = connect();
@@ -73,7 +107,14 @@ public class DatabaseHelper {
         }
     }
 
-    //update organism method connection to database
+    /**
+     * Update a chosen attribute for the organism.
+     *
+     * @param id Organism id to choose.
+     * @param column the attribute the user wants to update.
+     * @param newValue New value for the attribute.
+     * @return true for a successful update, false if unsuccessful.
+     */
     public boolean updateOrganism(String id, String column, String newValue) {
         String dbColumn;
         // switch case for attribute names to  database column names
@@ -157,6 +198,11 @@ public class DatabaseHelper {
         }
     }
 
+    /**
+     * Calculation for the average length of organisms buy their clades. Formatted into a string.
+     *
+     * @return string with the clade names and average length in those clades
+     */
     public String getAverageLengthByCladeString() {
         StringBuilder output = new StringBuilder();
         //sql statement for finding the averages and returning them
@@ -179,6 +225,11 @@ public class DatabaseHelper {
         return output.toString();
     }
 
+    /**
+     * Gets all the Organisms and puts them in a DefaultTableModel
+     *
+     * @return DefaultTableModel with all the organisms entered.
+     */
     public DefaultTableModel getAllOrganisms() {
         String[] columns = {"ID", "Clade", "Genus & Species", "Lifespan", "Lifespan Unit", "Features", "Average Length", "Length unit"};
         DefaultTableModel model = new DefaultTableModel(columns, 0);

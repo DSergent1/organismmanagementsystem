@@ -1,9 +1,9 @@
 package com.organism;
-/**This Organism manager class will hold the methods for CRUD operations and the
+/** Organism Manager is used for managing the Organism class objects.
+ *
+ * This Organism manager class will hold the methods for CRUD operations and the
  * custom action(finding average organism size grouped by clade).
-It will also hold the method for reading a file formatted properly to enter new organisms
- to the data in app or in the database(phase4)
-*/
+ */
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -14,11 +14,21 @@ public class OrganismManager {
 
         private ArrayList<Organism> organisms = new ArrayList<>();
 
+    /**
+     * Returns the list of organisms.
+     *
+     * @return the list containing all stored organisms.
+     */
         public ArrayList<Organism> getOrganisms(){
             return organisms;
         }
 
-        //checks if the id entered is a duplicate
+    /**
+     * Checking to see if the id entered is already one being used.
+     *
+     * @param id to check for a duplicate ID.
+     *  @return true if organism id is not a duplicate, false if it is a duplicate.
+     */
         public boolean idDuplicate(String id) {
             for (Organism organism : organisms) {
                 if (organism.getId().equals(id)) {
@@ -28,7 +38,12 @@ public class OrganismManager {
             return false;
         }
 
-        //method that adds an organism if the ID is unique
+    /**
+     * Method that adds an organism if the ID is unique.
+     *
+     * @param organism the organism to be added.
+     * @return true if the organism was successfully added; false if it's invalid or duplicate.
+     */
         public boolean addOrganism(Organism organism){
             if(organism == null || organism.getId().length() != 5){
                 return false;
@@ -38,7 +53,12 @@ public class OrganismManager {
             return true;
         }
 
-        //method to remove a patron for the list by using their id
+    /**
+     * Method to remove a patron for the list by using their id.
+     *
+     * @param id, choosing the organism by id.
+     * @return the removed organism, will return null if it doesn't exist.
+     */
         public Organism removeOrganism(String id){
             for (int i = 0; i < organisms.size(); i++){
                 if (organisms.get(i).getId().equals(id)) {
@@ -48,7 +68,11 @@ public class OrganismManager {
             return  null;
         }
 
-        //method to display all organisms
+    /**
+     * Method to display all organisms.
+     *
+     * Uses a tabled layout formatted to give each attribute a certain amount of space.
+     */
         public void displayOrganisms(){
             //rearranged display to show in a tabled format, dashes are for left-alignment
             System.out.printf("%-8s %-20s %-40s %-15s %-15s %-60s %-15s %-15s%n",
@@ -65,7 +89,14 @@ public class OrganismManager {
 
         }
 
-//method to update the organism, going through id, making sure its valid then selecting an attribute
+    /**
+     * Updates a specific attribute of an organism based on its ID.
+     *
+     * @param id the organism ID.
+     * @param attribute the field to update.
+     * @param newValue the new value to assign to the attribute.
+     * @return true if the update was successful; false if invalid attribute or value.
+     */
     public boolean updateOrganism(String id, String attribute, String newValue) {
         for (Organism organism : organisms) {
             if (organism.getId().equals(id)) {
@@ -111,7 +142,12 @@ public class OrganismManager {
         }
         return false;
     }
-    //custom method that makes an array based on clade and gives them an average length
+    /**
+     * Method that computes and displays the average organism length for each clade.
+     * Units are converted to centimeters for comparison.
+     *
+     * @return true if organisms exist and results were displayed; false if the list is empty.
+     */
     public boolean displayAverageLengthByClade() {
         //Check if array is empty
         if (organisms.isEmpty()) {
@@ -132,7 +168,12 @@ public class OrganismManager {
         }
         return true;
     }
-
+    /**
+     * Calculation method for the average length in cm of organisms belonging to a clade.
+     *
+     * @param clade the clade to calculate.
+     * @return the average length in centimeters.
+     */
     public float getAvg(String clade) {
         float totalForCentimeters = 0;
         int count = 0;
@@ -157,7 +198,13 @@ public class OrganismManager {
         return avg;
     }
 
-    //getter for testing custom method
+    /**
+     * Returns the calculated average length for a given clade.
+     * Made for testing the custom average-length method.
+     *
+     * @param cladeName the clade to calculate.
+     * @return the average length in centimeters, or 0 if no organisms match.
+     */
     public float getCustomMethodAverage(String cladeName){
             float sumOfClade = 0;
             int divisor = 0;
@@ -178,7 +225,16 @@ public class OrganismManager {
 
     }
 
-//method for loading in organisms from a file
+    /**
+     * Loads organisms from a text file and adds them to the collection.
+     *
+     * The file must contain entries in the format: id-cladeName-genusSpecies-lifespanEstimate-lifespanUnit-features-averageLength-lengthUnit.
+     *
+     * Each line is validated for:correct number of fields, valid 5-digit ID, non-duplicate ID, & positive numeric lifespan and length.
+     *
+     * @param filePath the path to the file to load.
+     * @return a message with the result or the error that occurred.
+     */
         public String loadFile(String filePath) {
 
 
