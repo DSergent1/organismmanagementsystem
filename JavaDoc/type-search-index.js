@@ -1,1 +1,0 @@
-typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"com.organism","l":"DatabaseHelper"},{"p":"com.organism","l":"Organism"},{"p":"com.organism","l":"OrganismApplication"},{"p":"com.organism","l":"OrganismGUI"},{"p":"com.organism","l":"OrganismManager"}];updateSearchResults();
