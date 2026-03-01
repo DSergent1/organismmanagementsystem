@@ -1,5 +1,5 @@
 package com.organism;
-
+//Organism class
 /**
  * This class is used to make an organism with information in attributes such as: clade names, genus and species,
  * defining features, and measurements.

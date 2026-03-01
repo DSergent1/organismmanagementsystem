@@ -26,6 +26,7 @@ public class OrganismGUI extends JFrame {
     private JButton fileUploadButton;
     private JButton updateOrganismButton;
     private DatabaseHelper dbHelper;
+    private JScrollPane scrollPane;
 
 
     /**
