@@ -14,6 +14,7 @@ import java.util.Scanner;
  * @author Daniel Sergent
  * @since 11/15/25
  */
+// change for my midterm
 public class OrganismApplication {
     private static Scanner scanner = new Scanner(System.in);
     private static OrganismManager manage = new OrganismManager();
