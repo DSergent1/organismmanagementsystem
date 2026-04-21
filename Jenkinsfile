@@ -6,26 +6,26 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'mvn clean package'
+                bat 'mvn clean package'
             }
         }
 
         stage('Test') {
             steps {
-                sh 'mvn test'
+               bat 'mvn test'
             }
         }
 
         stage('Docker Build') {
             steps {
-                sh 'docker build -t odms-app .'
+                bat 'docker build -t odms-app .'
             }
         }
 
         stage('Deploy') {
             steps {
-                sh 'kubectl apply -f deployment.yaml'
-                sh 'kubectl apply -f service.yaml'
+                bat 'kubectl apply -f deployment.yaml'
+                bat 'kubectl apply -f service.yaml'
             }
         }
     }
