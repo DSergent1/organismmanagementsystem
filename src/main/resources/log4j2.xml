@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- log4j2 file for structured logs -->
+<Configuration status="WARN">
+    <Appenders>
+
+        <!-- Console output -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <JsonLayout compact="true" eventEol="true"/>
+        </Console>
+
+        <!-- File output -->
+        <File name="FileLogger" fileName="logs/app.log">
+            <JsonLayout compact="true" eventEol="true"/>
+        </File>
+
+    </Appenders>
+
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="FileLogger"/>
+        </Root>
+    </Loggers>
+</Configuration>
