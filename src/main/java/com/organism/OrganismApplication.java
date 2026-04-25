@@ -1,5 +1,7 @@
 package com.organism;
 import java.util.Scanner;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 /**
  * This Organism application will serve as a study aid for my Biology 2 course and data management
  * system project for my Software Development 1 course.
@@ -16,6 +18,7 @@ import java.util.Scanner;
  */
 // change for my midterm
 public class OrganismApplication {
+    private static final Logger logger = LogManager.getLogger(OrganismApplication.class);
     private static Scanner scanner = new Scanner(System.in);
     private static OrganismManager manage = new OrganismManager();
 
