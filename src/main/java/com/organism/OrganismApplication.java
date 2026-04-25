@@ -1,7 +1,12 @@
 package com.organism;
 import java.util.Scanner;
+
+//Logger imports
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.ThreadContext;
+import java.util.UUID;
+
 /**
  * This Organism application will serve as a study aid for my Biology 2 course and data management
  * system project for my Software Development 1 course.
@@ -21,13 +26,18 @@ public class OrganismApplication {
     private static final Logger logger = LogManager.getLogger(OrganismApplication.class);
     private static Scanner scanner = new Scanner(System.in);
     private static OrganismManager manage = new OrganismManager();
-
     /**
      * Program starting point. Has a looping switch-case menu that allows the user to perform
      * CRUD operations and run custom a custom method through the CLI prompts.
      *
      */
     public static void main(String[] args) {
+        //adding logs to my code
+        String sessionId = UUID.randomUUID().toString();
+        ThreadContext.put("sessionId", sessionId);
+        logger.info("Application started. Session ID: {}", sessionId);
+
+
 
         boolean runProgram = true;
         while (runProgram) {
@@ -35,36 +45,45 @@ public class OrganismApplication {
 
             System.out.print("Enter choice: ");
             String userChoice = scanner.nextLine();
+            logger.info("User selected menu option: {}", userChoice);
 
             //switch case to connected to methods either in OrganismManager or CLI methods below
             switch (userChoice) {
                 case "1":
+                    logger.info("User selected: Import organisms");
                     importOrganisms();
                     break;
                 case "2":
+                    logger.info("User selected: Add organism");
                     addOrganismCLI();
                     break;
                 case "3":
+                    logger.info("User selected: Remove organisms");
                     removeOrganismCLI();
                     break;
                 case "4":
+                    logger.info("User selected: Display organisms");
                     manage.displayOrganisms();
                     break;
 
                     case "5":
+                        logger.info("User selected: Update organisms");
                     updateOrganismCLI();
                     break;
                 case "6":
+                    logger.info("User selected: Custom method");
                     manage.displayAverageLengthByClade();
                     break;
                 case "7":
                 {
+                    logger.info("User exited the application");
                     runProgram = false;
                     System.out.println("Exiting Organism Management System. Goodbye!");
                 }
                 break;
 
                     default:
+                        logger.info("User selected: Invalid response");
                     System.out.println("Invalid choice. Please enter a number 1–7.");
             }
         }
@@ -94,8 +113,14 @@ public class OrganismApplication {
      */
     public static void importOrganisms() {
         System.out.print("Enter file path (format: ID-CladeName-GenusSpecies-LifespanEstimate-LifespanUnit-DefiniteFeatures-AverageLength-LengthUnit): ");
+        logger.info("Importing organisms from file");
+
         String path = scanner.nextLine().trim();
+        logger.info("File path entered: {}", path);
+
         String report = manage.loadFile(path);
+
+        logger.info("Load result: {}", report);
         System.out.println(report);
         manage.displayOrganisms();
     }
@@ -108,12 +133,14 @@ public class OrganismApplication {
      */
     public static void addOrganismCLI() {
         System.out.println("Enter a new organism:");
+        logger.info("User is adding a new organism");
 
         //id portion of manually adding organism
         String id;
         while(true){
             System.out.println("Enter ID(make it 5 digits): ");
             id = scanner.nextLine();
+            logger.info("Entered ID: {}", id);
             boolean validId = id.length() == 5;
             for (int i = 0; i < id.length() && validId; i++) {
                 if (!Character.isDigit(id.charAt(i))) {
@@ -121,7 +148,8 @@ public class OrganismApplication {
                 }
             }
             if (!validId) {
-                System.out.println("Invalid ID");
+                System.out.println("Invalid ID. Re-enter");
+                continue;
             }
             if (manage.idDuplicate(id)) {
                 System.out.println("Id exists. Please try to enter a unique id: ");
@@ -129,6 +157,7 @@ public class OrganismApplication {
             }
             break;
         }
+        logger.info("Organism added successfully with ID: {}", id);
 
         //clade name attribute addition
         System.out.print("Enter the Clade name: ");
@@ -154,6 +183,7 @@ public class OrganismApplication {
                 break;
             }
                 catch (NumberFormatException e){
+                    logger.error("Invalid lifespan input: {}", lifespanString, e);
                         System.out.println("Invalid input. Please enter an integer.");
             }
         }
@@ -180,6 +210,7 @@ public class OrganismApplication {
                 }
                 break;
             } catch (NumberFormatException e) {
+                logger.error("Invalid average Length input: {}", avgLengthStr, e);
                 System.out.println("Invalid number. Try again.");
             }
         }
@@ -226,11 +257,14 @@ public class OrganismApplication {
         }
 
         //remove organism and show that it is removed or show that no ID was found
+        logger.info("Attempting to remove organism with ID: {}", id);
+
         Organism removed = manage.removeOrganism(id);
+
         if (removed != null) {
-            System.out.println("Removed Organism: " + removed);
+            logger.info("Organism removed: {}", removed);
         } else {
-            System.out.println("No organism found with that ID.");
+            logger.warn("No organism found with ID: {}", id);
         }
 
     }
@@ -262,10 +296,16 @@ public class OrganismApplication {
         String newValue = scanner.nextLine();
 
         boolean updated = manage.updateOrganism(id, attribute, newValue);
+        logger.info("Updating organism with ID: {}", id);
+        logger.info("Attribute to update: {}", attribute);
+        logger.info("New value: {}", newValue);
+
         if (updated) {
             System.out.println("Organism updated successfully!");
+            logger.info("Update successful for ID: {}", id);
         } else {
             System.out.println("Failed to update. Check ID, attribute, and value format.");
+            logger.error("Update failed for ID: {}", id);
         }
     }
 }

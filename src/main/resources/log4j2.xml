@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- log4j2 file for structured logs -->
 <Configuration status="WARN">
+
     <Appenders>
 
-        <!-- Console output -->
         <Console name="Console" target="SYSTEM_OUT">
-            <JsonLayout compact="true" eventEol="true"/>
+            <PatternLayout pattern="%d [%t] %-5level %logger{36} - %msg%n"/>
         </Console>
 
-        <!-- File output -->
         <File name="FileLogger" fileName="logs/app.log">
-            <JsonLayout compact="true" eventEol="true"/>
+            <PatternLayout pattern="%d [%t] %-5level %logger{36} - %msg%n"/>
         </File>
 
     </Appenders>
@@ -21,4 +19,5 @@
             <AppenderRef ref="FileLogger"/>
         </Root>
     </Loggers>
+
 </Configuration>

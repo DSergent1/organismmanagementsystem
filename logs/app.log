@@ -1,0 +1,51 @@
+Application started. Session ID: 7bc3815d-afa9-4a65-b986-56eb64927071
+User selected menu option: 2
+User selected: Add organism
+User is adding a new organism
+Entered ID: 154661
+Organism added successfully with ID: 154661
+Invalid lifespan input: ghsgfhs
+java.lang.NumberFormatException: For input string: "ghsgfhs"
+	at java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:67) ~[?:?]
+	at java.base/java.lang.Integer.parseInt(Integer.java:668) ~[?:?]
+	at java.base/java.lang.Integer.parseInt(Integer.java:786) ~[?:?]
+	at com.organism.OrganismApplication.addOrganismCLI(OrganismApplication.java:176) [classes/:?]
+	at com.organism.OrganismApplication.main(OrganismApplication.java:57) [classes/:?]
+2026-04-25 13:10:16,310 [main] INFO  com.organism.OrganismApplication - Application started. Session ID: c290e58a-2883-4fcf-b5c5-4044a0682e59
+2026-04-25 13:10:22,463 [main] INFO  com.organism.OrganismApplication - User selected menu option: 1
+2026-04-25 13:10:22,465 [main] INFO  com.organism.OrganismApplication - User selected: Import organisms
+2026-04-25 13:10:22,466 [main] INFO  com.organism.OrganismApplication - Importing organisms from file
+2026-04-25 13:10:35,765 [main] INFO  com.organism.OrganismApplication - File path entered: 9
+2026-04-25 13:10:35,766 [main] INFO  com.organism.OrganismManager - File load started: 9
+2026-04-25 13:10:35,769 [main] ERROR com.organism.OrganismManager - File read failure: 9
+java.io.FileNotFoundException: 9 (The system cannot find the file specified)
+	at java.base/java.io.FileInputStream.open0(Native Method) ~[?:?]
+	at java.base/java.io.FileInputStream.open(FileInputStream.java:216) ~[?:?]
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:157) ~[?:?]
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:111) ~[?:?]
+	at java.base/java.io.FileReader.<init>(FileReader.java:60) ~[?:?]
+	at com.organism.OrganismManager.loadFile(OrganismManager.java:271) [classes/:?]
+	at com.organism.OrganismApplication.importOrganisms(OrganismApplication.java:121) [classes/:?]
+	at com.organism.OrganismApplication.main(OrganismApplication.java:54) [classes/:?]
+2026-04-25 13:10:35,831 [main] INFO  com.organism.OrganismApplication - Load result: Error reading file: 9 (The system cannot find the file specified)
+2026-04-25 13:10:46,433 [main] INFO  com.organism.OrganismApplication - User selected menu option: 2
+2026-04-25 13:10:46,433 [main] INFO  com.organism.OrganismApplication - User selected: Add organism
+2026-04-25 13:10:46,435 [main] INFO  com.organism.OrganismApplication - User is adding a new organism
+2026-04-25 13:11:00,364 [main] INFO  com.organism.OrganismApplication - Entered ID: 12345
+2026-04-25 13:11:00,364 [main] INFO  com.organism.OrganismApplication - Organism added successfully with ID: 12345
+2026-04-25 13:11:35,076 [main] ERROR com.organism.OrganismApplication - Invalid lifespan input: dgjh
+java.lang.NumberFormatException: For input string: "dgjh"
+	at java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:67) ~[?:?]
+	at java.base/java.lang.Integer.parseInt(Integer.java:668) ~[?:?]
+	at java.base/java.lang.Integer.parseInt(Integer.java:786) ~[?:?]
+	at com.organism.OrganismApplication.addOrganismCLI(OrganismApplication.java:178) [classes/:?]
+	at com.organism.OrganismApplication.main(OrganismApplication.java:58) [classes/:?]
+2026-04-25 13:14:57,395 [main] INFO  com.organism.OrganismApplication - Application started. Session ID: fb2f73a8-78fc-4097-b3c2-5d52d718c33a
+2026-04-25 13:15:05,028 [main] INFO  com.organism.OrganismApplication - User selected menu option: 1
+2026-04-25 13:15:05,030 [main] INFO  com.organism.OrganismApplication - User selected: Import organisms
+2026-04-25 13:15:05,031 [main] INFO  com.organism.OrganismApplication - Importing organisms from file
+2026-04-25 13:15:54,547 [main] INFO  com.organism.OrganismApplication - Application started. Session ID: eca8f366-991f-4c77-8332-87e404187d42
+2026-04-25 13:16:22,995 [main] INFO  com.organism.OrganismApplication - Application started. Session ID: f1a40143-1324-469f-9de8-57510340fa5c
+2026-04-25 13:16:27,979 [main] INFO  com.organism.OrganismApplication - User selected menu option: 2
+2026-04-25 13:16:27,981 [main] INFO  com.organism.OrganismApplication - User selected: Add organism
+2026-04-25 13:16:27,982 [main] INFO  com.organism.OrganismApplication - User is adding a new organism

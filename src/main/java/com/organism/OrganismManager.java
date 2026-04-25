@@ -3,7 +3,9 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-//Jenkins change
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.ThreadContext;
 /**
  * Organism Manager is used for managing the Organism class objects.
  *
@@ -13,6 +15,7 @@ import java.util.ArrayList;
 public class OrganismManager {
 
         private ArrayList<Organism> organisms = new ArrayList<>();
+    private static final Logger logger = LogManager.getLogger(OrganismManager.class);
 
     /**
      * Returns the list of organisms.
@@ -44,14 +47,23 @@ public class OrganismManager {
      * @param organism the organism to be added.
      * @return true if the organism was successfully added; false if it's invalid or duplicate.
      */
-        public boolean addOrganism(Organism organism){
-            if(organism == null || organism.getId().length() != 5){
-                return false;
-            }
-            if(idDuplicate(organism.getId())) return false;
-            organisms.add(organism);
-            return true;
+    public boolean addOrganism(Organism organism){
+        logger.info("Attempting to add organism with ID: {}", organism.getId());
+
+        if(organism == null || organism.getId().length() != 5){
+            logger.warn("Failed add: invalid organism or ID format");
+            return false;
         }
+
+        if(idDuplicate(organism.getId())) {
+            logger.warn("Failed add: duplicate ID {}", organism.getId());
+            return false;
+        }
+
+        organisms.add(organism);
+        logger.info("Organism successfully added: {}", organism.getId());
+        return true;
+    }
 
     /**
      * Method to remove a patron for the list by using their id.
@@ -59,14 +71,20 @@ public class OrganismManager {
      * @param id, choosing the organism by id.
      * @return the removed organism, will return null if it doesn't exist.
      */
-        public Organism removeOrganism(String id){
-            for (int i = 0; i < organisms.size(); i++){
-                if (organisms.get(i).getId().equals(id)) {
-                    return organisms.remove(i);
-                }
+    public Organism removeOrganism(String id){
+        logger.info("Attempting to remove organism with ID: {}", id);
+
+        for (int i = 0; i < organisms.size(); i++){
+            if (organisms.get(i).getId().equals(id)) {
+                Organism removed = organisms.remove(i);
+                logger.info("Successfully removed organism: {}", id);
+                return removed;
             }
-            return  null;
         }
+
+        logger.warn("Remove failed: no organism found with ID {}", id);
+        return null;
+    }
 
     /**
      * Method to display all organisms.
@@ -98,11 +116,15 @@ public class OrganismManager {
      * @return true if the update was successful; false if invalid attribute or value.
      */
     public boolean updateOrganism(String id, String attribute, String newValue) {
+        logger.info("Update request | ID: {} | Attribute: {} | Value: {}",
+                id, attribute, newValue);
         for (Organism organism : organisms) {
             if (organism.getId().equals(id)) {
+                logger.debug("Found organism for update: {}", id);
                 switch (attribute.toLowerCase()) {
                     case "clade":
                         organism.setCladeName(newValue);
+                        logger.info("Updated clade for ID {}", id);
                         return true;
                     case "genus":
                         organism.setGenusSpecies(newValue);
@@ -111,9 +133,12 @@ public class OrganismManager {
                         try {
                             int lifespan = Integer.parseInt(newValue);
                             if (lifespan <= 0) return false;
+                            logger.warn("Invalid lifespan value for ID {}", id);
                             organism.setLifespanEstimate(lifespan);
+                            logger.info("Updated lifespan for ID {}", id);
                             return true;
                         } catch (NumberFormatException e) {
+                            logger.error("Lifespan parse error for ID {}", id, e);
                             return false;
                         }
                     case "lifespan unit":
@@ -136,10 +161,12 @@ public class OrganismManager {
                         organism.setLengthUnit(newValue);
                         return newValue.equals("mm") || newValue.equals("cm") || newValue.equals("m");
                     default:
+                        logger.warn("Invalid attribute update attempt: {}", attribute);
                         return false;
                 }
             }
         }
+        logger.warn("Update failed: organism not found with ID {}", id);
         return false;
     }
     /**
@@ -149,8 +176,10 @@ public class OrganismManager {
      * @return true if organisms exist and results were displayed; false if the list is empty.
      */
     public boolean displayAverageLengthByClade() {
+        logger.info("Calculating average length by clade");
         //Check if array is empty
         if (organisms.isEmpty()) {
+            logger.warn("No organisms available for calculation");
             System.out.println("No organisms available.");
             return false;
         }
@@ -237,6 +266,7 @@ public class OrganismManager {
      */
         public String loadFile(String filePath) {
 
+            logger.info("File load started: {}", filePath);
 
             try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
                 String line;
@@ -246,12 +276,16 @@ public class OrganismManager {
                 while ((line = br.readLine()) != null) {
                     lineNum++;
                     line = line.trim();
-                    if (line.isEmpty()) continue;
+                    if (line.isEmpty()) {
+                        logger.debug("Skipped empty line {}", lineNum);
+                        continue;
+                    }
 
                     //split used here to separate the individual parts of each line by the dash
                     // id-cladeName-genusSpecies-lifespanEstimate-lifespanUnit-definiteFeatures-averageLength-lengthUnit
                     String[] parts = line.split("-", 8);
                     if (parts.length != 8) {
+                        logger.error("Line {} invalid format", lineNum);
                         return "Line "+ lineNum+ ": is not in correct format.";
                     }
 
@@ -278,6 +312,7 @@ public class OrganismManager {
 
                     //Checks id for duplicates
                     if (idDuplicate(id)) {
+                        logger.warn("Duplicate ID found at line {}", lineNum);
                         return "Line "+ lineNum+ ": has a duplicate ID.";
                     }
 
@@ -299,15 +334,18 @@ public class OrganismManager {
                         return "Line " + lineNum + ": average length should be positive.";
                     }
 
-
+                    logger.debug("Processing organism ID {} from line {}", id, lineNum);
                     // Add the organism after validation
                     Organism o = new Organism(id, cladeName, genusSpecies, (int) lifespanEstimate,
                             lifespanUnit, definiteFeatures, (float) averageLength, lengthUnit);
                     organisms.add(o);
+                    logger.info("Added organism from file: {}", id);
                 }
+                logger.info("File load completed. Total lines: {}", lineNum);
                 return "File uploaded correctly. "+ lineNum + " organisms were successfully added.";
 
             } catch (IOException e) {
+                logger.error("File read failure: {}", filePath, e);
                 return "Error reading file: " + e.getMessage();
             }
         }
