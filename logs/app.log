@@ -49,3 +49,48 @@ java.lang.NumberFormatException: For input string: "dgjh"
 2026-04-25 13:16:27,979 [main] INFO  com.organism.OrganismApplication - User selected menu option: 2
 2026-04-25 13:16:27,981 [main] INFO  com.organism.OrganismApplication - User selected: Add organism
 2026-04-25 13:16:27,982 [main] INFO  com.organism.OrganismApplication - User is adding a new organism
+2026-04-26 01:38:27,913 [main] INFO  com.organism.OrganismApplication - Application started. Session ID: 23faba0a-6134-49f7-8a03-374a0687a8b9
+2026-04-26 01:38:34,754 [main] INFO  com.organism.OrganismApplication - User selected menu option: 2
+2026-04-26 01:38:34,756 [main] INFO  com.organism.OrganismApplication - User selected: Add organism
+2026-04-26 01:38:34,756 [main] INFO  com.organism.OrganismApplication - User is adding a new organism
+2026-04-26 01:38:38,145 [main] INFO  com.organism.OrganismApplication - Entered ID: 456432
+2026-04-26 01:38:41,989 [main] INFO  com.organism.OrganismApplication - Entered ID: 165165161
+2026-04-26 01:38:44,445 [main] INFO  com.organism.OrganismApplication - Entered ID: 45879
+2026-04-26 01:38:44,446 [main] INFO  com.organism.OrganismApplication - Organism added successfully with ID: 45879
+2026-04-26 01:38:54,595 [main] ERROR com.organism.OrganismApplication - Invalid lifespan input: sfgj
+java.lang.NumberFormatException: For input string: "sfgj"
+	at java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:67) ~[?:?]
+	at java.base/java.lang.Integer.parseInt(Integer.java:668) ~[?:?]
+	at java.base/java.lang.Integer.parseInt(Integer.java:786) ~[?:?]
+	at com.organism.OrganismApplication.addOrganismCLI(OrganismApplication.java:178) [classes/:?]
+	at com.organism.OrganismApplication.main(OrganismApplication.java:58) [classes/:?]
+2026-04-26 01:39:01,137 [main] ERROR com.organism.OrganismApplication - Invalid lifespan input: 1/0
+java.lang.NumberFormatException: For input string: "1/0"
+	at java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:67) ~[?:?]
+	at java.base/java.lang.Integer.parseInt(Integer.java:668) ~[?:?]
+	at java.base/java.lang.Integer.parseInt(Integer.java:786) ~[?:?]
+	at com.organism.OrganismApplication.addOrganismCLI(OrganismApplication.java:178) [classes/:?]
+	at com.organism.OrganismApplication.main(OrganismApplication.java:58) [classes/:?]
+2026-04-26 01:39:12,773 [main] ERROR com.organism.OrganismApplication - Invalid average Length input: fdagfd
+java.lang.NumberFormatException: For input string: "fdagfd"
+	at java.base/jdk.internal.math.FloatingDecimal.readJavaFormatString(FloatingDecimal.java:2054) ~[?:?]
+	at java.base/jdk.internal.math.FloatingDecimal.parseFloat(FloatingDecimal.java:122) ~[?:?]
+	at java.base/java.lang.Float.parseFloat(Float.java:476) ~[?:?]
+	at com.organism.OrganismApplication.addOrganismCLI(OrganismApplication.java:206) [classes/:?]
+	at com.organism.OrganismApplication.main(OrganismApplication.java:58) [classes/:?]
+2026-04-26 01:39:14,654 [main] ERROR com.organism.OrganismApplication - Invalid average Length input: fdagf
+java.lang.NumberFormatException: For input string: "fdagf"
+	at java.base/jdk.internal.math.FloatingDecimal.readJavaFormatString(FloatingDecimal.java:2054) ~[?:?]
+	at java.base/jdk.internal.math.FloatingDecimal.parseFloat(FloatingDecimal.java:122) ~[?:?]
+	at java.base/java.lang.Float.parseFloat(Float.java:476) ~[?:?]
+	at com.organism.OrganismApplication.addOrganismCLI(OrganismApplication.java:206) [classes/:?]
+	at com.organism.OrganismApplication.main(OrganismApplication.java:58) [classes/:?]
+2026-04-26 01:39:24,543 [main] INFO  com.organism.OrganismManager - Attempting to add organism with ID: 45879
+2026-04-26 01:39:24,561 [main] INFO  com.organism.OrganismManager - Organism successfully added: 45879
+2026-04-26 01:39:28,835 [main] INFO  com.organism.OrganismApplication - User selected menu option: 4
+2026-04-26 01:39:28,835 [main] INFO  com.organism.OrganismApplication - User selected: Display organisms
+2026-04-26 01:39:58,096 [main] INFO  com.organism.OrganismApplication - User selected menu option: 6
+2026-04-26 01:39:58,097 [main] INFO  com.organism.OrganismApplication - User selected: Custom method
+2026-04-26 01:39:58,097 [main] INFO  com.organism.OrganismManager - Calculating average length by clade
+2026-04-26 01:41:31,622 [main] INFO  com.organism.OrganismApplication - User selected menu option: 7
+2026-04-26 01:41:31,623 [main] INFO  com.organism.OrganismApplication - User exited the application

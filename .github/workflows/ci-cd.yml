@@ -40,7 +40,7 @@ jobs:
         run: |
           echo "Verifying staging..."
           # simulate success
-          exit 0
+          exit 1
 
   production:
     needs: staging
