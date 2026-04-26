@@ -11,10 +11,10 @@ java.lang.NumberFormatException: For input string: "ghsgfhs"
 	at java.base/java.lang.Integer.parseInt(Integer.java:786) ~[?:?]
 	at com.organism.OrganismApplication.addOrganismCLI(OrganismApplication.java:176) [classes/:?]
 	at com.organism.OrganismApplication.main(OrganismApplication.java:57) [classes/:?]
-2026-04-25 13:10:16,310 [main] INFO  com.organism.OrganismApplication - Application started. Session ID: c290e58a-2883-4fcf-b5c5-4044a0682e59
-2026-04-25 13:10:22,463 [main] INFO  com.organism.OrganismApplication - User selected menu option: 1
+2026-04-25 13:10:16,310 [main] INFO  com.organism.OrganismApplication -
 2026-04-25 13:10:22,465 [main] INFO  com.organism.OrganismApplication - User selected: Import organisms
-2026-04-25 13:10:22,466 [main] INFO  com.organism.OrganismApplication - Importing organisms from file
+2026-04-25 13:10:22,466 [main] INFO  com.organism.OrganismApplication - Application started. Session ID: c290e58a-2883-4fcf-b5c5-4044a0682e59
+                                                                        2026-04-25 13:10:22,463 [main] INFO  com.organism.OrganismApplication - User selected menu option: 1Importing organisms from file
 2026-04-25 13:10:35,765 [main] INFO  com.organism.OrganismApplication - File path entered: 9
 2026-04-25 13:10:35,766 [main] INFO  com.organism.OrganismManager - File load started: 9
 2026-04-25 13:10:35,769 [main] ERROR com.organism.OrganismManager - File read failure: 9
