@@ -36,8 +36,7 @@ public class OrganismApplication {
         String sessionId = UUID.randomUUID().toString();
         ThreadContext.put("sessionId", sessionId);
         logger.info("Application started. Session ID: {}", sessionId);
-
-
+        
 
         boolean runProgram = true;
         while (runProgram) {
