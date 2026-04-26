@@ -94,3 +94,26 @@ java.lang.NumberFormatException: For input string: "fdagf"
 2026-04-26 01:39:58,097 [main] INFO  com.organism.OrganismManager - Calculating average length by clade
 2026-04-26 01:41:31,622 [main] INFO  com.organism.OrganismApplication - User selected menu option: 7
 2026-04-26 01:41:31,623 [main] INFO  com.organism.OrganismApplication - User exited the application
+2026-04-26 05:14:01,607 [main] INFO  com.organism.OrganismApplication - Application started. Session ID: 11cb2a12-fba7-483f-b059-2171be689e57
+2026-04-26 05:17:43,446 [main] INFO  com.organism.OrganismApplication - Application started. Session ID: c518d6eb-d09d-4c56-bfc4-67c31532a419
+2026-04-26 05:17:48,152 [main] INFO  com.organism.OrganismApplication - User selected menu option: 2
+2026-04-26 05:17:48,154 [main] INFO  com.organism.OrganismApplication - User selected: Add organism
+2026-04-26 05:17:48,154 [main] INFO  com.organism.OrganismApplication - User is adding a new organism
+2026-04-26 05:17:52,555 [main] INFO  com.organism.OrganismApplication - Entered ID: 124565
+2026-04-26 05:17:55,210 [main] INFO  com.organism.OrganismApplication - Entered ID: 12345
+2026-04-26 05:17:55,210 [main] INFO  com.organism.OrganismApplication - Organism added successfully with ID: 12345
+2026-04-26 05:17:59,205 [main] ERROR com.organism.OrganismApplication - Invalid lifespan input: dghj
+java.lang.NumberFormatException: For input string: "dghj"
+	at java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:67) ~[?:?]
+	at java.base/java.lang.Integer.parseInt(Integer.java:668) ~[?:?]
+	at java.base/java.lang.Integer.parseInt(Integer.java:786) ~[?:?]
+	at com.organism.OrganismApplication.addOrganismCLI(OrganismApplication.java:178) [classes/:?]
+	at com.organism.OrganismApplication.main(OrganismApplication.java:58) [classes/:?]
+2026-04-26 05:18:09,713 [main] INFO  com.organism.OrganismManager - Attempting to add organism with ID: 12345
+2026-04-26 05:18:09,715 [main] INFO  com.organism.OrganismManager - Organism successfully added: 12345
+2026-04-26 05:18:13,988 [main] INFO  com.organism.OrganismApplication - User selected menu option: 7
+2026-04-26 05:18:13,989 [main] INFO  com.organism.OrganismApplication - User exited the application
+DATADOG_TEST_04/26/2026 05:22:52
+
+DATADOG_SUCCESS_TEST
+DATADOG_TEST

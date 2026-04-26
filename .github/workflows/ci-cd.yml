@@ -30,7 +30,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Simulate Staging Deployment
+      - name: Staging Deployment
         run: |
           echo "Deploying to staging..."
           mkdir staging
@@ -39,7 +39,7 @@ jobs:
       - name: Verify Staging
         run: |
           echo "Verifying staging..."
-          # simulate success
+          # success
           exit 1
 
   production:
